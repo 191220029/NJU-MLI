@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,bm}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumerate}
+
+\title{Introduction to Machine Learning\\ Homework 1}
+
+\begin{document}
+	\maketitle
+	\numberwithin{equation}{section}
+	\section*{Academic integrity}
+	Our lesson cares much more on academic integrity. No matter who should do our utmost to handle the establishment of academic integrity standard including the host teacher and assistants of this lesson. We hope you will have the same faith with us.
+	\begin{enumerate}[(1)]
+        \item Discussion between students is allowing. 
+        The work named by yourself must be completed by your own hands. 
+        Any kind of Copying from existing documents will be seen as illegal.
+        \item Any kind of Copying from other people's fruits of labour(Publication or Internet documents) will be accused of plagiarism. 
+        The score of plagiarists will be canceled. 
+        Please mark the authors if you cited any public documents of them;
+        \item Highly resemble homework will be seen as Coping. 
+        No matter who you are, the one who copy or the one who is copied, both of your score will be canceled. 
+        Please protect your homework not to be copied by others actively.
+    \end{enumerate}
+
+	\section*{Homework submission notes}
+    \begin{enumerate}[(1)]
+        \item Please follow the submission methods on the website;
+        \item If you are not follow the methods or your submission format are not correct. 
+        We will deduct some score of your homework;
+        \item Unless some special cases, the submission over deadline will not be accepted and your score will be set as zero. 
+    \end{enumerate}
+
+    \newpage
+    \section{[30pts] Basic concepts}
+    \newcommand{\rD}{\mathrm{D}}
+    \newcommand{\rT}{\mathrm{T}}
+    \subsection{Probabiliy}
+        Suppose Bob has been tested with a terrible disease. 
+        The event $\rT$ and $\rD$ represent a person has been tested positive for this disease and actually has this disease, respectively. 
+        According to statistics, we know:
+        \begin{equation}
+            \begin{cases}
+                \Pr(\rT | \rD) &= 0.98\\
+                \Pr(\rT | \lnot \rD) &= 0.10\\
+                \Pr(\rD) &= 0.01
+            \end{cases}
+        \end{equation}
+        He wants you to help him calculate the probability that he actually has the disease?
+    
+    \subsection{Maximum likelihood estimation}
+    We have an uneven coin, and the probability of tossing it heads up at random is $p$. 
+    Suppose you toss this coin 10 times, 8 of which are heads up. 
+    Please estimate $p$ based on the existing information using MLE.
+    
+    \subsection{Performance meause}
+    We have a set of samples with binary classes (denoted as 0 and 1) and two classifers $C_1$ and $C_2$.
+    For each sample, the classifier gives a score to measure the confidence that the classifier believes that the sample belongs to class 1.
+    Below are the predicted results of two classifiers ($C_1$ and $C_2$) for 8 samples, their ground truth labels ($y$), and the scores  for both classifiers ($y_{C_1}$ and $y_{C_2}$).
+	\begin{table}[htbp]
+		\centering
+		\begin{tabular}{c|cccccccc}
+			\hline
+			$y$ & 1 & 0 & 1 & 1 & 1 & 0 & 0 & 1\\
+			\hline
+			$y_{C_1}$ & 0.62 & 0.39 & 0.18 & 0.72 & 0.45 & 0.01 & 0.32 & 0.93\\
+			\hline
+			$y_{C_2}$ & 0.34 & 0.12 & 0.82 & 0.89 & 0.17 & 0.75 & 0.36 & 0.97\\
+			\hline
+		\end{tabular}
+	\end{table}
+	\begin{enumerate}[(1)]
+        \item Calculate the area under the ROC curve (AUROC) for both classifiers $C_1$ and $C_2$. 
+        \item For the classifier $C_1$, we select a decision threshold $th_1 = 0.40$ which means that $C_1$ classifies a sample as class 1, if its score $y_{C_1} > th_1$, otherwise it classifies this sample as class 0. 
+        Calculate the confusion matrix and the $F_1$ score. 
+        Do the same thing for the classifier $C_2$ using a threshold value $th_2 = 0.90$.
+    \end{enumerate}
+
+    \newpage
+    \section{[20pts] Linear model}
+    \newcommand{\w}{\mathbf{w}}
+    \newcommand{\x}{\mathbf{x}}
+    \newcommand{\y}{\mathbf{y}}
+    \newcommand{\W}{\mathbf{W}}
+    \newcommand{\X}{\mathbf{X}}
+    \newcommand{\Y}{\mathbf{Y}}
+    Suppose you are given a data set $D=\{(\mathbf{x}_i, y_i)\}_{i=1}^n$, where ${x}_i \in \mathbb{R}^d, y_i \in \mathbb{R}$.
+    We want to use a regularized linear regression model to fit this data set, that is, to solve the following minimization problem:
+    \begin{equation}
+        \w^{*} = \mathop{\arg \min}_{\w} \frac{1}{2}\|\y-\X \w\|_2^2 + \lambda\|\w\|_2^2
+        \label{lr:obj}
+    \end{equation}
+    where, $\y \in \mathbb{R}^m, \X \in R^{n\times d}$. Assume that $\X$ is column full-rank matrix.
+    \begin{enumerate}
+        \item Please give the closed-form solution for Eq.(\ref{lr:obj}). You need to give your solution in detail.
+        \item The data set D is shown in the Table \ref{lr:trs}, where each sample has 3 dimensions ($F_1$, $F_2$, $F_3$). Please calculate the optimal solution for $\w$ when $\lambda = 1$.
+    \end{enumerate}
+    \begin{table}[!htb]
+        \centering
+        \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+            \hline
+            $F_1$ & 2 & 9 & 8 & 8 & 2 & 8 & 4 & 1 & 3 & 5\\ \hline
+            $F_2$ & 9 & 3 & 3 & 8 & 1 & 4 & 3 & 8 & 3 & 3\\ \hline
+            $F_3$ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\ \hline
+            $y$ & 290 & 1054 & 944 & 964 & 246 & 948 & 488 & 167 & 370 & 598 \\
+            \hline
+        \end{tabular}
+        \caption{Training set for linear regression}
+        \label{lr:trs}
+    \end{table}
+    
+    \newpage
+    \section{[20pts] Decision tree}
+    Suppose you are given data consisting of a training set of 5 examples and a test set of 4 examples.
+    Each sample in the training and test set has three binary features ($A, B, C$) and one binary label ($y$).
+    \begin{enumerate}[(1)]
+        \item Using the training set (Table \ref{dt:trs}), construct a decision tree for the binary classification. 
+        Use the Information Gain (IG) as the decision criterion to select which attribute to split on. 
+        Show your calculations for the IG for all possible attributes for every split. 
+        (If there are multiple optimal features when splitting, please select the feature with the smallest alphabetical order.)
+        \item Now evaluate the decision tree you have created on the test set (Table \ref{dt:tes}).
+    \end{enumerate}
+    \begin{table}[h!]
+		\centering
+		\begin{tabular}{ccc|c}
+			\hline
+			A & B & C & y\\
+			\hline
+			1 & 0 & 1 & 1 \\
+            1 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 1 \\
+            1 & 0 & 1 & 1 \\
+			\hline
+		\end{tabular}
+        \caption{Training set for decision tree}
+        \label{dt:trs}
+	\end{table}
+    \begin{table}[h!]
+		\centering
+		\begin{tabular}{ccc|c}
+			\hline
+			A & B & C & y\\
+			\hline
+			0 & 0 & 0 & 0 \\
+            0 & 1 & 1 & 1 \\
+            1 & 1 & 1 & 0 \\
+            1 & 0 & 0 & 0 \\
+			\hline
+		\end{tabular}
+        \caption{Training set for decision tree}
+        \label{dt:tes}
+	\end{table}
+    
+    \newpage
+    \section{[30pts] Neural network}
+    In this problem, you are asked to build a neural networks from scratch and examine performance of the network you just build on pendigits\footnote{https://archive.ics.uci.edu/ml/machine-learning-databases/pendigits/} data set.
+    Here are some instructments listed below:
+    \begin{enumerate}
+        \item You are allow to use out-of-the-box deep learning tools (e.g., PyTorch, TensorFlow, \ldots) to build your model.
+        \item You don't have to implement deep and complex neural networks to achieve the state-of-the-art performance. However, brief performance comparisons between different architectures, different hyper-parameters, and different optimization methods are needed.
+        \item You need to submit your code and describe how to use them. Briefly showing your analysis, experimental results, and conclusions in this homework is also necessary.
+    \end{enumerate}
+	
+\end{document}

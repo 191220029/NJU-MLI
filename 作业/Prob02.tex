@@ -1,0 +1,82 @@
+\documentclass[a4paper,UTF8]{article}
+\usepackage{CJKutf8}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata} 
+
+%\setmainfont                    [Ligatures=TeX]{Times New Roman}
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+\newtheorem*{prove}{Proof}
+\begin{document}
+\begin{CJK}{UTF8}{gkai}
+\title{PTC (Fall 2021) -- Assignment 2}
+\author{
+    \begin{minipage}[b]{0.3\linewidth}
+      \begin{flushright}
+        Name: 傅小龙\\%\rule{3cm}{0.4pt}\\
+        \vbox to 1mm{}
+        Grade: 3%\rule{3cm}{0.4pt}
+      \end{flushright}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.3\linewidth}
+      \begin{flushright}
+        Dept: CS\\%\rule{3cm}{0.4pt}\\
+        \vbox to 1mm{}
+        ID: 191220029%\rule{3cm}{0.4pt}
+      \end{flushright}
+    \end{minipage}
+}
+%\date{\color{red} \Large Due: Nov. 30, 2021}
+\date{}
+\maketitle
+
+\setlength{\baselineskip}{18pt}
+\begin{flushleft}
+\section*{Problem 1}
+\end{flushleft}
+Give context free grammars that generate the following languages, and give a brief description of the
+functionality of each variable in your grammars (in natural language).
+\begin{enumerate}
+  \item[a.] $\{w \in \{0,1\}^{*}\ \mid w=w^{R}\ \ and\ \ |w|\ \ is\ \ even\ \}$
+  \item[b.] $\{w \in \{a, b\}^{*}| in\ \  w,\ \ the\ \ number \ \ of\ \ b\ \ = \ \ 1 + \ \ the \ \ number\ \ of\ \  a\}.$
+  \item[c.] $\{ a^ib^jc^k\ |\ i,j,k\geq 0,\ and\ \ i=j\ \ or\ \ i=k\}
+$
+\end{enumerate}
+\begin{solution}\end{solution}
+\begin{enumerate}
+	\item[a.] 
+	$G = (\{ S \}, \{ 0, 1 \}, P, S)$, where $P$ consists of:\\
+	$
+		S \rightarrow 1S1\ |\ 0S0\ |\ 0\ |\ 1\\
+		Description:\text{S is the start symbol.}
+	$
+	\item[b.] 
+	$G = (\{ S \}, \{ a, b \}, P, S)$, where $P$ consists of:\\
+	$
+		S \rightarrow b\ |\ abS\ |\ baS\ |\ aSb\ |\ bSa\ |\ Sab\ |\ Sba\\
+		Description:\text{S is the start symbol.}
+	$
+	\item[c.] 
+	$G = (\{ S,A,B,C,D,E \}, \{ a, b, c \}, P, S)$, where $P$ consists of:\\
+	$
+		S \rightarrow A\ |\ B\\
+		A \rightarrow CD\\
+		B \rightarrow aBc\ |\ E\\
+		C \rightarrow aCb\ |\ \epsilon \\
+		D \rightarrow cD\ |\ \epsilon\\
+		E \rightarrow bE\ |\ \epsilon\\
+		Description:\text{S is the start symbol. A产生$a^ib^jc^k(i = j)$.B产生$a^ib^jc^k(i = k)$.C产生$a^ib^j(i = j)$.}
+						\\	\text{D产生$c^k$.E产生$b^j$.}
+	$
+\end{enumerate}
+\end{CJK}
+\end{document}
